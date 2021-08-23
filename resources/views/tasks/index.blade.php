@@ -2,8 +2,8 @@
 
 @section('title','Список задач')
 
+
 @section('content')
-    <h1>Список задач</h1>
     <div class="row">
     @for ($i=0;$i<10;++$i)
      <div class="col-3">
