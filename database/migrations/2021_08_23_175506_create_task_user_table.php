@@ -15,8 +15,8 @@ class CreateTaskUserTable extends Migration
     {
         Schema::create('task_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('task_id');
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('task_id')->references('id')->on('tasks');
         });
     }
 

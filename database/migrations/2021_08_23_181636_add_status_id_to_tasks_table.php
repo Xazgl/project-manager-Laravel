@@ -14,7 +14,7 @@ class AddStatusIdToTasksTable extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->foreignId('status_id');
+            $table->foreignId('status_id')->references('id')->on('statuses');
         });
     }
 
