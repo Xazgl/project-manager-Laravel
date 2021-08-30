@@ -12,7 +12,11 @@ class TaskController extends Controller
 
     public function index()
     {
-        return view('tasks.index');
+         $tasks = Task::select('id','title','preview_text')->get();
+        return view(
+            'tasks.index',
+            ['list'=>$tasks]
+        );
     }
 
 
