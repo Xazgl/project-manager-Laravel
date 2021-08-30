@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Files extends Model
+class File extends Model
 {
     use HasFactory;
 
-    public $timestamps = true;
     protected $table = 'files';//на какую таблицу должна смотреть наша модель
-
+    protected $fillable=['path','name','mime'];
 
 }

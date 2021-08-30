@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Status;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -21,7 +23,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('tasks.create');
     }
 
     /**
@@ -32,7 +34,27 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->all();
+
+        //$task= new Task();
+        //$task->title = $data['title'];
+        //$task->preview_text = $data['preview'];
+        //$task->detail_text = $data['detail'];
+        //$task->status_id=1;
+        //$task-> save();
+
+
+
+
+        //Получение объекта статуса "Новая"
+        $status = Status::find(1);
+        //Привязка к статусу объекта задачи
+        $status->tasks()->create([
+            'title' =>$data['title'],
+            'preview_text' =>$data['preview'],
+            'detail_text' => $data['detail']
+        ]);
+        return redirect(route('tasks.index'));
     }
 
     /**

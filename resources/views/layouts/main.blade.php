@@ -34,6 +34,9 @@
                         <a class="nav-link" href="{{ Route('tasks.index') }}">Мои задачи</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ Route('tasks.create') }}">Создать задачу</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#">Профиль</a>
                     </li>
                 </ul>
