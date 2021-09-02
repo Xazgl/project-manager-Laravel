@@ -70,7 +70,9 @@ class TaskController extends Controller
     public function show($id)
 
       {
-          return view('tasks.show');
+         $task = Task::select('id','title','detail_text','status_id')->find($id);
+         $status=$task->status;
+          return view('tasks.show',['task'=>$task, 'status'=>$status]);
       }
 
 
@@ -83,7 +85,9 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
+        $task = Task::select('id','title','detail_text','preview_text','status_id')->find($id);
+        $status=$task->status;
+        return view('tasks.edit',['task'=>$task, 'status'=>$status]);
     }
 
     /**

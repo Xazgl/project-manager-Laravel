@@ -17,4 +17,8 @@ class Task extends Model
     {
         return $this->hasMany(Mini::class);
     }
+    public function status()
+    {
+     return $this->belongsTo((Status::class));
+    }
 }

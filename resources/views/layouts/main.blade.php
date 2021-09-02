@@ -28,7 +28,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Главная</a>
+                        <a class="nav-link active" aria-current="page" href="{{ Route('tasks.index') }}">Главная</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ Route('tasks.index') }}">Мои задачи</a>

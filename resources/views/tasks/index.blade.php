@@ -11,7 +11,7 @@
             <div class="card-body">
             <h5 class="card-title">{{$item->title}}</h5>
             <p class="card-text">{{$item->preview_text}}</p>
-            <a href="{{ route('tasks.show',['task'=>1]) }}" class="btn btn-primary">Подробнее</a>
+            <a href="{{ route('tasks.show',['task'=>$item->id]) }}" class="btn btn-primary">Подробнее</a>
             </div>
         </div>
      </div>
