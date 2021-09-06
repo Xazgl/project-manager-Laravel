@@ -3,6 +3,7 @@
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +49,9 @@ use Illuminate\Support\Facades\Route;
 Route::resource('tasks',TaskController::class);
 
 Route::get('/',[IndexController::class,'index'])->name('index');
+
+Route::post('/registration',[UserController::class,'reg_store'])->name('User.registration');
+Route::get('/registration',[UserController::class,'registration'])->name('user_reg');
 
 
 
