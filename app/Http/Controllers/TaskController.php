@@ -86,8 +86,11 @@ class TaskController extends Controller
     public function edit($id)
     {
         $task = Task::select('id','title','detail_text','preview_text','status_id')->find($id);
-        $status=$task->status;
-        return view('tasks.edit',['task'=>$task, 'status'=>$status]);
+        $statuses=Status::get();
+        return view('tasks.edit',[
+            'task'=>$task,
+            'statusList'=>$statuses
+        ]);
     }
 
     /**
@@ -99,7 +102,19 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //СОбрали все данные с формы
+      $data = $request->all();
+      //Получили необходимую хадачу из базы,которую будем редактировать
+      $task=Task::find($id);
+      //Перезаписываем данные
+      $task->title=$data['title'];
+      $task->preview_text=$data['preview'];
+      $task->detail_text=$data['detail'];
+      $task->status_id=$data['status'];
+      //сохраняем в базе
+      $task->save();
+      //редирект на страницу с детальным опис
+      return redirect(route('tasks.show',['task'=>$id]));
     }
 
     /**

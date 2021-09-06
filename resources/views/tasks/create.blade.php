@@ -6,7 +6,7 @@
 
 
 @section('content')
-  <form method="post" action="{{route('tasks.store')}}">
+  <form method="post" action="{{ route('tasks.store') }}">
       @csrf
     <div class="mb-3">
         <label for="title" class="form-label">Название задачи</label>

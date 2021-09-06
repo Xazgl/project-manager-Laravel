@@ -5,8 +5,19 @@
 @section('content')
 
 
-    <form method="post" action="{{route('tasks.store')}}">
+    <form method="post" action="{{route('tasks.update',['task'=>$task->id]) }}">
         @csrf
+        @method('PUT')
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Статус задачи</label>
+        <select class="form-select" name="status" aria-label="Default select example">
+            @foreach($statusList as $status)
+            <option value="{{ $status->id }}" @if($status->id==$task->status->id) selected @endif> {{ $status->name }}</option>
+            @endforeach
+
+        </select>
+
         <div class="mb-3">
             <label for="title" class="form-label">Название</label>
             <input type="text" class="form-control" id="title" name="title" value="{{$task->title}}">
