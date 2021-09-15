@@ -10,10 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,100&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-     <link href="/style/style.css" rel="stylesheet">
+    <link href="/style/style.css" rel="stylesheet">
     <title>@yield('title')</title>
   </head>
-  <body>
+  <body>/
 
   <section class="background">
 
@@ -37,7 +37,10 @@
                         <a class="nav-link" href="{{ Route('tasks.create') }}">Создать задачу</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ Route('user_reg') }}">Профиль</a>
+                        <a class="nav-link" href="{{ Route('user_reg') }}">Регистрация</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ Route('login') }}">Войти</a>
                     </li>
                 </ul>
             </div>

@@ -5,6 +5,7 @@
 @section('content')
 
 
+
     <form method="post" action="{{route('User.registration')}}">
         @csrf
         <div class="mb-3">
