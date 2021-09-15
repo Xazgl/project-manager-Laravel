@@ -35,10 +35,27 @@ class UserController extends Controller
     }
 
     public function auth(Request $request)
+
     {
      $data=$request->all();
 
-     $user=User::select('id','email','password')
+     if (!auth::attempt([
+         'email'=> $data ['email'],
+         'password'=>$data['password']
+     ])) {
+         return back()->withErrors([
+             'message'=>'Неверный пароль']);
+
+     }
+
+
+
+   }
+
+
+
+
+     /* $user=User::select('id','email','password')
          ->where('email','=',$data['email'])
          ->first();
 
@@ -54,6 +71,6 @@ class UserController extends Controller
             }
 
      return redirect(route('index'));
-    }
+    } */
 
 }
