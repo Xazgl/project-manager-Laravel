@@ -46,7 +46,7 @@ use Illuminate\Support\Facades\Route;
 //Route::Get('/task/{id}',[TaskController::class,'show'])->name('show');
 
 
-Route::resource('tasks',TaskController::class);
+Route::resource('tasks',TaskController::class)->middleware('auth');
 
 Route::get('/',[IndexController::class,'index'])->name('index');
 
@@ -55,8 +55,11 @@ Route::get('/registration',[UserController::class,'registration'])->name('user_r
 
 Route::get('/login',[UserController::class,'loginForm'])->name('loginForm');
 Route::post('/login',[UserController::class,'auth'])->name('authUser');
-Route::get('/logout',[UserController::class,'logout'])->name('exit');
-
-Route::get('/user',[UserController::class,'show'])->name('user.show');
 
 
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/logout',[UserController::class,'logout'])->name('exit');
+    Route::get('/user',[UserController::class,'show'])->name('user.show');
+});
