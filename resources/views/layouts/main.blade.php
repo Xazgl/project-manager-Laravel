@@ -37,21 +37,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ Route('tasks.create') }}">Создать задачу</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ Route('exit') }}">Выйти</a>
+                    </li>
+                    <li class="nav-item">
+                         <a class="nav-link" href="{{ route('user.show',['id'=>Auth::id()]) }}">{{ Auth::user()->name }}</a>
+                    </li>
                     @endauth
-
                     @guest()
                     <li class="nav-item">
                         <a class="nav-link" href="{{ Route('user_reg') }}">Регистрация</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ Route('login') }}">Войти</a>
+                        <a class="nav-link" href="{{ Route('loginForm') }}">Войти</a>
                     </li>
-                    <li class="nav-item">
-                         <a class="nav-link" href="{{ Route('exit') }}">Выйти</a>
-                    </li>
-                    <li class="nav-item">
-                          <a class="nav-link" href="#">{{ Auth::user()->name }}</a>
-                    </li>
+
                     @endguest
 
                 </ul>

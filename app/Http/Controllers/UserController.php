@@ -59,6 +59,19 @@ class UserController extends Controller
 
         return redirect(route('loginForm'));
     }
+
+    public function show(int $id)
+    {
+       $data=user::select('id','name','surname','birthday','email')->find($id);
+       return view('user.show',['user'=>$data]);
+
+    }
+
+
+
+
+
+
 }
 /* $user=User::select('id','email','password')
          ->where('email','=',$data['email'])
