@@ -57,5 +57,6 @@ Route::get('/login',[UserController::class,'loginForm'])->name('loginForm');
 Route::post('/login',[UserController::class,'auth'])->name('authUser');
 Route::get('/logout',[UserController::class,'logout'])->name('exit');
 
-Route::get('/user/{id}',[UserController::class,'show'])->name('user.show');
+Route::get('/user',[UserController::class,'show'])->name('user.show');
+
 

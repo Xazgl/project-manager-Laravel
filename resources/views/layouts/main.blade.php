@@ -13,11 +13,11 @@
     <link href="/style/style.css" rel="stylesheet">
     <title>@yield('title')</title>
   </head>
-  <body>/
+  <body>
 
   <section class="background">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="https://te-st.ru/wp-content/uploads/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0-2012-08-30-%D0%B2-13.07.34.png" alt="" width="30" height="24">
@@ -44,6 +44,7 @@
                          <a class="nav-link" href="{{ route('user.show',['id'=>Auth::id()]) }}">{{ Auth::user()->name }}</a>
                     </li>
                     @endauth
+
                     @guest()
                     <li class="nav-item">
                         <a class="nav-link" href="{{ Route('user_reg') }}">Регистрация</a>
@@ -51,7 +52,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ Route('loginForm') }}">Войти</a>
                     </li>
-
                     @endguest
 
                 </ul>

@@ -22,16 +22,18 @@ class UserController extends Controller
             $account->password = Hash::make($account_data['password']);
             $account->email = $account_data['email'];
             $account->name = $account_data['name'];
+            $account->surname = $account_data['surname'];
+            $account->birthday = $account_data['birthday'];
             $account->save();
         }
-        return redirect(route('User.registration'));
+        return redirect(route('index'));
 
 
     }
 
     public function loginForm()
     {
-        return view('users.login');
+        return view('user.login');
 
     }
 
@@ -47,6 +49,7 @@ class UserController extends Controller
             return back()->withErrors([
                 'message' => 'Неверный пароль']);
             }
+        return redirect(route('index'));
     }
 
     public function logout(Request $request)
@@ -60,17 +63,13 @@ class UserController extends Controller
         return redirect(route('loginForm'));
     }
 
-    public function show(int $id)
+    public function show()
     {
-       $data=user::select('id','name','surname','birthday','email')->find($id);
-       return view('user.show',['user'=>$data]);
+
+          $data=user::select('id','name','surname','birthday','email')->find(Auth::id());
+          return view('user.show',['user'=>$data]);
 
     }
-
-
-
-
-
 
 }
 /* $user=User::select('id','email','password')

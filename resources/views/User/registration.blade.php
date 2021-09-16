@@ -10,11 +10,11 @@
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Имя пользователя</label>
-            <input type="text" class="password" id="password" name="name"  placeholder="Введите имя">
+            <input type="text" class="name" id="name" name="name"  placeholder="Введите имя">
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">Фамилия</label>
-            <input type="text" class="password" id="surname" name="surname"  placeholder="Введите фамилию">
+            <input type="text" class="name" id="surname" name="surname"  placeholder="Введите фамилию">
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">Дата рождения</label>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Status;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -12,7 +13,8 @@ class TaskController extends Controller
 
     public function index()
     {
-         $tasks = Task::select('id','title','preview_text')->get();
+         $tasks = Auth::user()->tasks()//->select('id','title','preview_text')
+         ->get();
         return view(
             'tasks.index',
             ['list'=>$tasks]
@@ -53,11 +55,12 @@ class TaskController extends Controller
         //Получение объекта статуса "Новая"
         $status = Status::find(1);
         //Привязка к статусу объекта задачи
-        $status->tasks()->create([
+        $task=$status->tasks()->create([
             'title' =>$data['title'],
             'preview_text' =>$data['preview'],
             'detail_text' => $data['detail']
         ]);
+        $task->users()->attach(Auth::id());
         return redirect(route('tasks.index'));
     }
 
