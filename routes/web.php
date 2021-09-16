@@ -55,6 +55,5 @@ Route::get('/registration',[UserController::class,'registration'])->name('user_r
 
 Route::get('/login',[UserController::class,'loginForm'])->name('loginForm');
 Route::post('/login',[UserController::class,'auth'])->name('authUser');
-
-
+Route::get('/logout',[UserController::class,'logout'])->name('exit');
 

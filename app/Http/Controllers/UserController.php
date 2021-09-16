@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -47,15 +48,19 @@ class UserController extends Controller
              'message'=>'Неверный пароль']);
 
      }
-
-
-
    }
 
+    public function logout(Request $request) {
+        Auth::logout();
+        //Чистим данные пользователя в его хранилище
+        $request->session()->invalidate();
+        //Убираем токен "ЗАПОМНИТЬ"
+        $request->session()->regenerateToken();
 
+        return redirect(route('loginForm'));
+    }
 
-
-     /* $user=User::select('id','email','password')
+/* $user=User::select('id','email','password')
          ->where('email','=',$data['email'])
          ->first();
 

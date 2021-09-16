@@ -30,24 +30,34 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ Route('tasks.index') }}">Главная</a>
                     </li>
+                    @auth()
                     <li class="nav-item">
                         <a class="nav-link" href="{{ Route('tasks.index') }}">Мои задачи</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ Route('tasks.create') }}">Создать задачу</a>
                     </li>
+                    @endauth
+
+                    @guest()
                     <li class="nav-item">
                         <a class="nav-link" href="{{ Route('user_reg') }}">Регистрация</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ Route('login') }}">Войти</a>
                     </li>
+                    <li class="nav-item">
+                         <a class="nav-link" href="{{ Route('exit') }}">Выйти</a>
+                    </li>
+                    @endguest
+
                 </ul>
             </div>
         </div>
     </nav>
 
     <div class="container">
+        {{ Auth::user()->email }}
        @yield('content')
     </div>
 
