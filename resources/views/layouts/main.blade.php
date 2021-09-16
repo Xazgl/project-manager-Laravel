@@ -49,6 +49,9 @@
                     <li class="nav-item">
                          <a class="nav-link" href="{{ Route('exit') }}">Выйти</a>
                     </li>
+                    <li class="nav-item">
+                          <a class="nav-link" href="#">{{ Auth::user()->name }}</a>
+                    </li>
                     @endguest
 
                 </ul>
@@ -57,7 +60,6 @@
     </nav>
 
     <div class="container">
-        {{ Auth::user()->email }}
        @yield('content')
     </div>
 

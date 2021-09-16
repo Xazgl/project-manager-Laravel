@@ -9,27 +9,27 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function registration() {
-    return view('User.registration');
+    public function registration()
+    {
+        return view('User.registration');
     }
 
     public function reg_store(Request $request)
     {
-        $account_data=$request->all();
-          if ( $account_data['password']== $account_data['password2']) {
-            $account= new User();
+        $account_data = $request->all();
+        if ($account_data['password'] == $account_data['password2']) {
+            $account = new User();
             $account->password = Hash::make($account_data['password']);
-            $account->email =   $account_data['email'];
-            $account->name =  $account_data['name'];
-            $account-> save();
-          }
-          return redirect(route('User.registration'));
-
+            $account->email = $account_data['email'];
+            $account->name = $account_data['name'];
+            $account->save();
+        }
+        return redirect(route('User.registration'));
 
 
     }
 
-    public function loginForm ()
+    public function loginForm()
     {
         return view('users.login');
 
@@ -38,19 +38,19 @@ class UserController extends Controller
     public function auth(Request $request)
 
     {
-     $data=$request->all();
+        $data = $request->all();
 
-     if (!auth::attempt([
-         'email'=> $data ['email'],
-         'password'=>$data['password']
-     ])) {
-         return back()->withErrors([
-             'message'=>'Неверный пароль']);
+        if (!auth::attempt([
+            'email' => $data ['email'],
+            'password' => $data['password']
+            ], isset($data['remember']))) {
+            return back()->withErrors([
+                'message' => 'Неверный пароль']);
+            }
+    }
 
-     }
-   }
-
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         Auth::logout();
         //Чистим данные пользователя в его хранилище
         $request->session()->invalidate();
@@ -59,7 +59,7 @@ class UserController extends Controller
 
         return redirect(route('loginForm'));
     }
-
+}
 /* $user=User::select('id','email','password')
          ->where('email','=',$data['email'])
          ->first();
@@ -78,4 +78,4 @@ class UserController extends Controller
      return redirect(route('index'));
     } */
 
-}
+
