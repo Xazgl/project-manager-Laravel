@@ -50,13 +50,13 @@ Route::resource('tasks',TaskController::class)->middleware('auth');
 
 Route::get('/',[IndexController::class,'index'])->name('index');
 
-Route::post('/registration',[UserController::class,'reg_store'])->name('User.registration');
-Route::get('/registration',[UserController::class,'registration'])->name('user_reg');
+Route::middleware('guest')->group(function () {
+    Route::post('/registration', [UserController::class, 'reg_store'])->name('User.registration');
+    Route::get('/registration', [UserController::class, 'registration'])->name('user_reg');
 
-Route::get('/login',[UserController::class,'loginForm'])->name('loginForm');
-Route::post('/login',[UserController::class,'auth'])->name('authUser');
-
-
+    Route::get('/login', [UserController::class, 'loginForm'])->name('loginForm');
+    Route::post('/login', [UserController::class, 'auth'])->name('authUser');
+});
 
 
 Route::middleware('auth')->group(function () {
