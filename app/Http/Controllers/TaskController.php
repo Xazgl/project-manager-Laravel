@@ -131,3 +131,44 @@ class TaskController extends Controller
         //
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//App\providers\AuthServiceProvider создаем шлюз
+
+public function boot()
+{
+    $this->registerPolicies();
+    Gate::define('update-my_task',function (Auth::$user(),$task_id) {
+    return $user->id===$task_user->user_id;
+})
+}
+
+//в TaskController в функции show авторизируем действия шлюза с помощью allows
+
+public function show($id)
+{
+    if (Gate::allows('update-my_task', $task_user)) {
+
+        {
+            $task = Task::select('id', 'title', 'detail_text', 'status_id')->find($id);
+            $status = $task->status;
+            return view('tasks.show', ['task' => $task, 'status' => $status]);
+        }
+
+    }
+
+}
+
+
+

@@ -28,12 +28,12 @@
 
         <div class="mb-3">
             <label for="password" class="form-label">Пароль</label>
-            <input type="text" class="password" id="password" name="password"  placeholder="Введите пароль">
+            <input type="password" class="password" id="password" name="password"  placeholder="Введите пароль">
 
 
 
             <label for="password" class="form-label">Подтвердите пароль</label>
-            <input type="text" class="password" id="password" name="password2"  placeholder="Введите пароль">
+            <input type="password" class="password" id="password" name="password2"  placeholder="Введите пароль">
         </div>
 
 
