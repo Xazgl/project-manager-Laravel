@@ -30,7 +30,8 @@ class TaskPolicy
      */
     public function view(User $user, Task $task)
     {
-        //
+
+        return $this->update($user,$task);
     }
 
     /**
@@ -41,7 +42,7 @@ class TaskPolicy
      */
     public function create(User $user)
     {
-        //
+
     }
 
     /**

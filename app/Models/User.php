@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use http\Exception\UnexpectedValueException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model implements Authenticatable
+class User extends \Illuminate\Foundation\Auth\User
 {
-    use \Illuminate\Auth\Authenticatable, HasFactory;
+    use  HasFactory;
 
     protected $table = 'users';//на какую таблицу должна смотреть наша модель
 

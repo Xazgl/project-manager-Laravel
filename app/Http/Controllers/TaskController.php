@@ -72,9 +72,14 @@ class TaskController extends Controller
     public function show($id)
 
     {
-        $task = Task::select('id', 'title', 'detail_text', 'status_id')->find($id);
-        $status = $task->status;
-        return view('tasks.show', ['task' => $task, 'status' => $status]);
+
+            $task = Task::select('id', 'title', 'detail_text', 'status_id')->find($id);
+            $status = $task->status;
+        if (Auth::user()->can('view')) {
+            return view('tasks.show', ['task' => $task, 'status' => $status]);
+        } else {
+            return redirect(route('tasks.index'));
+        }
     }
 
 

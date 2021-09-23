@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Task;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TaskUpdateRequest extends FormRequest
@@ -13,7 +14,20 @@ class TaskUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        //$task=Task::find($this->route('task'));
+        //Находим id задачи из параметера маршрутка {task}
+        $taskID=$this->route('task');
+
+        //Извлекаем из базы задачу с $id=$taskID
+        $task=Task::find($taskID);
+
+        //Если вошли в базу нашли задачу
+        if (isset($task)) {
+           return  $this->user()->can('update',$task);
+        } else {
+            return false;
+        }
+
     }
 
     /**
