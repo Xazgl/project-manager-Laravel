@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskUpdateRequest;
 use App\Models\Status;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -13,11 +14,11 @@ class TaskController extends Controller
 
     public function index()
     {
-         $tasks = Auth::user()->tasks()//->select('id','title','preview_text')
-         ->get();
+        $tasks = Auth::user()->tasks()//->select('id','title','preview_text')
+        ->get();
         return view(
             'tasks.index',
-            ['list'=>$tasks]
+            ['list' => $tasks]
         );
     }
 
@@ -35,36 +36,34 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $data=$request->all();
+// public function store(Request $request)
+    // {
+    //   $data=$request->all();
 
-        //$task= new Task();
-        //$task->title = $data['title'];
-        //$task->preview_text = $data['preview'];
-        //$task->detail_text = $data['detail'];
-        //$task->status_id=1;
-        //$task-> save();
-
-
+    //$task= new Task();
+    //$task->title = $data['title'];
+    //$task->preview_text = $data['preview'];
+    //$task->detail_text = $data['detail'];
+    //$task->status_id=1;
+    //$task-> save();
 
 
-        //Получение объекта статуса "Новая"
-        $status = Status::find(1);
-        //Привязка к статусу объекта задачи
-        $task=$status->tasks()->create([
-            'title' =>$data['title'],
-            'preview_text' =>$data['preview'],
-            'detail_text' => $data['detail']
-        ]);
-        $task->users()->attach(Auth::id());
-        return redirect(route('tasks.index'));
-    }
+    /* //Получение объекта статуса "Новая"
+     $status = Status::find(1);
+     //Привязка к статусу объекта задачи
+     $task=$status->tasks()->create([
+         'title' =>$data['title'],
+         'preview_text' =>$data['preview'],
+         'detail_text' => $data['detail']
+     ]);
+     $task->users()->attach(Auth::id());
+     return redirect(route('tasks.index'));
+ }*/
 
-    /**
+    /*
      * Display the specified resource.
      *
      * @param  int  $id
@@ -72,64 +71,64 @@ class TaskController extends Controller
      */
     public function show($id)
 
-      {
-         $task = Task::select('id','title','detail_text','status_id')->find($id);
-         $status=$task->status;
-          return view('tasks.show',['task'=>$task, 'status'=>$status]);
-      }
-
+    {
+        $task = Task::select('id', 'title', 'detail_text', 'status_id')->find($id);
+        $status = $task->status;
+        return view('tasks.show', ['task' => $task, 'status' => $status]);
+    }
 
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $task = Task::select('id','title','detail_text','preview_text','status_id')->find($id);
-        $statuses=Status::get();
-        return view('tasks.edit',[
-            'task'=>$task,
-            'statusList'=>$statuses
+        $task = Task::select('id', 'title', 'detail_text', 'preview_text', 'status_id')->find($id);
+        $statuses = Status::get();
+        return view('tasks.edit', [
+            'task' => $task,
+            'statusList' => $statuses
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TaskUpdateRequest $request, $id)
     {
         //СОбрали все данные с формы
-      $data = $request->all();
-      //Получили необходимую хадачу из базы,которую будем редактировать
-      $task=Task::find($id);
-      //Перезаписываем данные
-      $task->title=$data['title'];
-      $task->preview_text=$data['preview'];
-      $task->detail_text=$data['detail'];
-      $task->status_id=$data['status'];
-      //сохраняем в базе
-      $task->save();
-      //редирект на страницу с детальным опис
-      return redirect(route('tasks.show',['task'=>$id]));
+        $data = $request->validated();
+        //Получили необходимую хадачу из базы,которую будем редактировать
+        $task = Task::find($id);
+        //Перезаписываем данные
+        $task->title = $data['title'];
+        $task->preview_text = $data['preview'];
+        $task->detail_text = $data['detail'];
+        $task->status_id = $data['status'];
+        //сохраняем в базе
+        $task->save();
+        //редирект на страницу с детальным опис
+        return redirect(route('tasks.show', ['task' => $id]));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
     }
+
 }
 
 
@@ -144,6 +143,7 @@ class TaskController extends Controller
 
 
 
+/*
 //App\providers\AuthServiceProvider создаем шлюз
 
 public function boot()
@@ -169,6 +169,6 @@ public function show($id)
     }
 
 }
-
+*/
 
 
