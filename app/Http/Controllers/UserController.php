@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserLogin;
+use App\Http\Requests\UserRegister;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ class UserController extends Controller
         return view('User.registration');
     }
 
-    public function reg_store(Request $request)
+    public function reg_store(UserRegister $request)
     {
         $account_data = $request->all();
         if ($account_data['password'] == $account_data['password2']) {
