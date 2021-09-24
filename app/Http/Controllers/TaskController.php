@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskCreateRequest;
 use App\Http\Requests\TaskUpdateRequest;
 use App\Models\Status;
 use App\Models\Task;
@@ -39,8 +40,8 @@ class TaskController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-// public function store(Request $request)
-    // {
+ public function store(TaskCreateRequest $request)
+   {
     //   $data=$request->all();
 
     //$task= new Task();
@@ -51,7 +52,7 @@ class TaskController extends Controller
     //$task-> save();
 
 
-    /* //Получение объекта статуса "Новая"
+  // Получение объекта статуса "Новая"
      $status = Status::find(1);
      //Привязка к статусу объекта задачи
      $task=$status->tasks()->create([
@@ -61,7 +62,7 @@ class TaskController extends Controller
      ]);
      $task->users()->attach(Auth::id());
      return redirect(route('tasks.index'));
- }*/
+ }
 
     /*
      * Display the specified resource.
@@ -69,6 +70,7 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
 
     {

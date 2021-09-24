@@ -19,17 +19,23 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         Task::class=>TaskPolicy::class
     ];
-
+}
     /**
      * Register any authentication / authorization services.
      *
      * @return void
      */
-    public function boot()
+ /*public function boot()
     {
         $this->registerPolicies();
+
+        $this->registerPolicies();
+        Gate::define('update-my_task',function (Auth::$user(),$task_id) {
+        return $user->id===$task_user->user_id;
+    })
         //Gate::define('update-post',function (Auth::$user())
 
         //
-    }
-}
+    } */
+
+

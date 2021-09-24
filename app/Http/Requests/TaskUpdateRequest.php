@@ -16,7 +16,7 @@ class TaskUpdateRequest extends FormRequest
     {
         //$task=Task::find($this->route('task'));
         //Находим id задачи из параметера маршрутка {task}
-        $taskID=$this->route('task');
+        $UserAuth=$this->route('task');
 
         //Извлекаем из базы задачу с $id=$taskID
         $task=Task::find($taskID);
