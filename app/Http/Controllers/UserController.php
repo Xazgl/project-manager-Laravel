@@ -16,7 +16,7 @@ class UserController extends Controller
         return view('User.registration');
     }
 
-    public function reg_store(UserRegister $request)
+    public function reg_store(Request $request)
     {
         $account_data = $request->all();
         if ($account_data['password'] == $account_data['password2']) {
@@ -39,7 +39,7 @@ class UserController extends Controller
 
     }
 
-    public function auth(UserLogin $request)
+    public function auth(Request $request)
 
     {
         $data = $request->all();

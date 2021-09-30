@@ -12,7 +12,7 @@ class Task extends Model
     protected $table = 'tasks'; //на какую таблицу должна смотреть наша модель
     protected  $fillable=['title','preview_text','detail_text'];
 
-
+//$miniss=$task->miniss
     public function  miniss()
     {
         return $this->hasMany(Mini::class);

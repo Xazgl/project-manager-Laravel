@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskCreateRequest;
 use App\Http\Requests\TaskUpdateRequest;
+use App\Models\Mini;
 use App\Models\Status;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -40,9 +41,9 @@ class TaskController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
- public function store(TaskCreateRequest $request)
+ public function store(Request $request)
    {
-    //   $data=$request->all();
+       $data=$request->all();
 
     //$task= new Task();
     //$task->title = $data['title'];
@@ -61,6 +62,17 @@ class TaskController extends Controller
          'detail_text' => $data['detail']
      ]);
      $task->users()->attach(Auth::id());
+     //Привязка мини задач
+       //$data['mini']
+       foreach($data['mini'] as $mini) {
+           if (strlen($mini) > 0) {   // если длина строки болбше 0 то дальше
+               $miniModel = new Mini();
+               $miniModel->text = $mini;
+               // Беру id из таблицы tasks сохранненой в переменой $task выше
+               $miniModel->task_id = $task->id;
+               $miniModel->save();
+           }
+       }
      return redirect(route('tasks.index'));
  }
 
@@ -77,7 +89,7 @@ class TaskController extends Controller
 
             $task = Task::select('id', 'title', 'detail_text', 'status_id')->find($id);
             $status = $task->status;
-        if (Auth::user()->can('view')) {
+        if (Auth::user()->can('view',$task)) {
             return view('tasks.show', ['task' => $task, 'status' => $status]);
         } else {
             return redirect(route('tasks.index'));

@@ -11,6 +11,7 @@ class Mini extends Model
 
     protected $table = 'miniss';
     protected $fillable = ['text'];
+    public $timestamps = false;
 
 
     public function  task()
