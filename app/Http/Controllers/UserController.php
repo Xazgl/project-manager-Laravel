@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserAuthRequest;
 use App\Http\Requests\UserLogin;
 use App\Http\Requests\UserRegister;
 use App\Models\User;
@@ -39,10 +40,10 @@ class UserController extends Controller
 
     }
 
-    public function auth(Request $request)
+    public function auth(UserAuthRequest $request)
 
     {
-        $data = $request->all();
+        $data = $request->validated();
 
         if (!auth::attempt([
             'email' => $data ['email'],
