@@ -41,9 +41,9 @@ class TaskController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
- public function store(Request $request)
+ public function store(TaskCreateRequest $request)
    {
-       $data=$request->all();
+       $data=$request->validated();
 
     //$task= new Task();
     //$task->title = $data['title'];
@@ -124,8 +124,10 @@ class TaskController extends Controller
     {
         //СОбрали все данные с формы
         $data = $request->validated();
+
         //Получили необходимую хадачу из базы,которую будем редактировать
         $task = Task::find($id);
+
         //Перезаписываем данные
         $task->title = $data['title'];
         $task->preview_text = $data['preview'];
@@ -133,6 +135,21 @@ class TaskController extends Controller
         $task->status_id = $data['status'];
         //сохраняем в базе
         $task->save();
+        //удалить все мини-задачи для текущей задачи
+        $task->miniss()->delete();
+        //сохраняем мини-задачи из формы
+        foreach ($data['mini'] as $mini)
+        {
+            if (strlen($mini) > 0)
+            {
+                $miniModel = new Mini();
+                $miniModel->text = $mini;
+                $miniModel->task_id = $task->id; // привязываю к задаче
+                $miniModel->save();
+            }
+        }
+
+
         //редирект на страницу с детальным опис
         return redirect(route('tasks.show', ['task' => $id]));
     }

@@ -41,6 +41,17 @@
             <label for="exampleFormControlTextarea1" class="form-label"></label>
             <textarea class="form-control" id="exampleFormControlTextarea1" name="detail"  rows="10">{{$task->detail_text}}</textarea>
         </div>
+            <div class="mb-3">
+                <label class="form-label">Мини задачи</label>
+                <ul id="mini-list">
+                    @foreach($task->miniss as  $mini)
+                    <li class="md-3">
+                        <input  class="form-control" type="text" name="mini[]" value="{{ $mini->text }}">
+                    </li>
+                    @endforeach
+                </ul>
+                <button id="add-mini">Добавить</button>
+            </div>
         <button class="btm_submit1" type ="submit">Готово</button>
         <br>
         <br>
@@ -53,5 +64,12 @@
 
 @section('scripts')
     @parent
-
+       <script>
+           //1. J_qverн повесил обработчик на кнопку
+           $("#add-mini").on("click",function(event){
+           event.preventDefault();
+           //Логика нажатия на кнопку
+           $("#mini-list").append('<li><input  class="form-control" type="text" name="mini[]"></li>')
+           });
+       </script>
 @endsection
