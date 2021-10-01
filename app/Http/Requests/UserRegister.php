@@ -47,7 +47,6 @@ class UserRegister extends FormRequest
             'password.numbers'=>'Пароль должен содержать числа',
             'email.name'=>'Введите Имя',
             'email.surname'=>'Введите Фамилию'
-
         ];
     }
 
