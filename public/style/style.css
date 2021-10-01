@@ -20,7 +20,7 @@ body {
 
 
 .background {
-    background-image: url("/picture/1.jpg");
+    background-image: url(" /task-manager/public/picture/1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;

@@ -17,9 +17,9 @@ class UserController extends Controller
         return view('User.registration');
     }
 
-    public function reg_store(Request $request)
+    public function reg_store(UserRegister $request)
     {
-        $account_data = $request->all();
+        $account_data = $request->validated();
         if ($account_data['password'] == $account_data['password2']) {
             $account = new User();
             $account->password = Hash::make($account_data['password']);

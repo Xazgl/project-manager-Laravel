@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class UserAuthRequest extends FormRequest
 {
@@ -26,6 +27,7 @@ class UserAuthRequest extends FormRequest
         return [
             'email'=>['required','email','max:255','exists:users,email'],
             'password'=>['required','string','min:8'],
+
         ];
     }
     public function messages()
