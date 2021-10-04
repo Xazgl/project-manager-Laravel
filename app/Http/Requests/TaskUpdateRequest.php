@@ -43,7 +43,8 @@ class TaskUpdateRequest extends FormRequest
             'detail'=>['required','string','max:1000'],
             'status'=>['required','numeric','max:255','exists:statuses,id'],
             'mini'=>['array'],
-            'mini.*'=>['string','max:255']
+            'mini.*'=>['string','max:255'],
+            'file'=>['file','image','max:1024']
         ];
     }
     public function messages()

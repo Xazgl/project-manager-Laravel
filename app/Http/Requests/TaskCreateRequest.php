@@ -28,7 +28,8 @@ class TaskCreateRequest extends FormRequest
             'preview'=>['required','string','max:255'],
             'detail'=>['required','string','max:1000'],
             'mini'=>['array'],
-            'mini.*'=>['string','max:255']
+            'mini.*'=>['string','max:255'],
+            'file'=>['file','image','max:1024']
         ];
     }
 

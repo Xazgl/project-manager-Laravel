@@ -14,8 +14,14 @@
 
 
 @section('content')
-  <form method="post" action="{{ route('tasks.store') }}">
+  <form method="post" action="{{ route('tasks.store') }}"  enctype="multipart/form-data">
       @csrf
+
+      <div class="mb-3">
+          <label for="formFile" class="form-label">Изображение</label>
+          <input type="file" class="form-control" id="formFile" name="file">
+      </div>
+
     <div class="mb-3">
         <label for="title" class="form-label">Название задачи</label>
         <input type="text" class="form-control" id="title" name="title" placeholder="Введите название">
