@@ -16,9 +16,14 @@
 
 
 
-    <form method="post" action="{{ route('tasks.update',['task'=>$task->id]) }}"  enctype="multipart/form-data">>
+    <form method="post" action="{{ route('tasks.update',['task'=>$task->id]) }}"  enctype="multipart/form-data">
         @csrf
         @method('PUT')
+
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Заменить Изображение</label>
+            <input type="file" class="form-control" id="formFile" name="file">
+        </div>
 
         <div class="mb-3">
             <label for="title" class="form-label">Статус задачи</label>
@@ -28,10 +33,6 @@
             @endforeach
 
         </select>
-            <div class="mb-3">
-                <label for="formFile" class="form-label">Изображение</label>
-                <input type="file" class="form-control" id="formFile" name="file">
-            </div>
 
         <div class="mb-3">
             <label for="title" class="form-label">Название</label>

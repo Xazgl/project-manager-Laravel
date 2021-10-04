@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskCreateRequest;
 use App\Http\Requests\TaskUpdateRequest;
+use App\Models\File;
 use App\Models\Mini;
 use App\Models\Status;
 use App\Models\Task;
@@ -64,6 +65,7 @@ class TaskController extends Controller
      $task->users()->attach(Auth::id());
      //Привязка мини задач
        //$data['mini']
+       if (isset ($data['mini'])) {
        foreach($data['mini'] as $mini) {
            if (strlen($mini) > 0) {   // если длина строки болбше 0 то дальше
                $miniModel = new Mini();
@@ -73,7 +75,22 @@ class TaskController extends Controller
                $miniModel->save();
            }
        }
-     return redirect(route('tasks.index'));
+       }
+
+            //Привязка файла
+            //Если файл был успешно загружен
+       if (isset($data['file'])) {
+           //  1.Сохраняем файл в папке images
+           $path = $data['file']->store('images');
+           //  2.Сохраняем файл в базу
+           $file = new File();
+           $file->task_id = $task->id;
+           $file->path = $path;
+           $file->name = $data['file']->getClientOriginalName();
+           $file->mime = $data['file']->getClientMimeType();
+           $file->save();
+       }
+       return redirect(route('tasks.index'));
  }
 
     /*
@@ -111,6 +128,10 @@ class TaskController extends Controller
             'task' => $task,
             'statusList' => $statuses
         ]);
+
+
+
+
     }
 
     /**
@@ -148,7 +169,19 @@ class TaskController extends Controller
                 $miniModel->save();
             }
         }
+         if (isset($data['file'])) {
 
+         }
+           //Привязка файла
+          //  1.Сохраняем файл в папке images
+       $path = $data['file']->store('images');
+        //  2.Сохраняем файл в базу
+       $file=new File();
+       $file->task_id = $task->id;
+       $file->path = $path;
+       $file->name = $data['file']->getClientOriginalName();
+       $file->mime = $data['file']->getClientMimeType();
+       $file->save();
 
         //редирект на страницу с детальным опис
         return redirect(route('tasks.show', ['task' => $id]));

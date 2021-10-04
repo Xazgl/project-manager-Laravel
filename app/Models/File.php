@@ -12,4 +12,8 @@ class File extends Model
     protected $table = 'files';//на какую таблицу должна смотреть наша модель
     protected $fillable=['path','name','mime'];
 
+    public function task()
+    {
+        return $this->belongsTo(Task::class);
+    }
 }

@@ -26,5 +26,8 @@ class Task extends Model
     {
         return $this->belongsToMany(User::class);
     }
-
+    public function file()
+    {
+        return $this->hasone(File::class);
+    }
 }
