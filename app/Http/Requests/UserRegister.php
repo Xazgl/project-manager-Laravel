@@ -26,11 +26,10 @@ class UserRegister extends FormRequest
     {
         return [
             'email'=>['required','email','max:255','unique:users,email'],
-            'password'=>['required','string',Password::min(6) ->mixedCase()],
-            'password2'=> 'required_with:password|same:password|min:6',
+            'password'=>['required','string','confirmed',Password::min(6) ->mixedCase()],
             'name'=>['required','string','max:255'],
             'surname'=>['required','string','max:255'],
-            //'birthday'=>['required','data','max:255'],
+            'birthday'=>['required','date_format:Y-m-d']
         ];
     }
 
@@ -43,7 +42,7 @@ class UserRegister extends FormRequest
             'email.max'=>'Логин больше 255 символов ',
             'password.min'=>'Пароль слишком короткий',
             'password.mixedCase'=>'Пароль должен содержать заглавные и строчные буквы',
-            'password2.same'=>'Пароли не совпадают',
+            'password.confirmed'=>'Пароли не совпадают',
             'password.numbers'=>'Пароль должен содержать числа',
             'email.name'=>'Введите Имя',
             'email.surname'=>'Введите Фамилию'

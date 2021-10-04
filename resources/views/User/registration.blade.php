@@ -19,30 +19,30 @@
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Имя пользователя</label>
-            <input type="text" class="name" id="name" name="name"  placeholder="Введите имя">
+            <input type="text" class="name" id="name" name="name"  placeholder="Введите имя" value="{{ old ('name') }}">
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">Фамилия</label>
-            <input type="text" class="name" id="surname" name="surname"  placeholder="Введите фамилию">
+            <input type="text" class="name" id="surname" name="surname"  placeholder="Введите фамилию" value="{{ old ('surname') }}">
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">Дата рождения</label>
-            <input type="date" class="password" id="birthday" name="birthday"  placeholder="Введите дату">
+            <input type="date" class="password" id="birthday" name="birthday"  placeholder="Введите дату" value="{{ old ('birthday') }}">
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Логин</label>
-            <input type="email" class="name" id="email" name="email" placeholder="Введите Логин">
+            <input type="email" class="name" id="email" name="email" placeholder="Введите Логин" value="{{ old ('email') }}">
         </div>
 
 
         <div class="mb-3">
             <label for="password" class="form-label">Пароль</label>
-            <input type="password" class="password" id="password" name="password"  placeholder="Введите пароль">
+            <input type="password" class="password" id="password" name="password"  placeholder="Введите пароль" value="{{ old ('password') }}">
 
 
 
             <label for="password" class="form-label">Подтвердите пароль</label>
-            <input type="password" class="password" id="password" name="password2"  placeholder="Введите пароль">
+            <input type="password" class="password" id="password" name="password_confirmation"  placeholder="Введите пароль" value="{{ old ('password_confirmation') }}">
         </div>
 
 

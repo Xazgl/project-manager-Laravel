@@ -19,8 +19,8 @@ class UserController extends Controller
 
     public function reg_store(UserRegister $request)
     {
-        $account_data = $request->validated();
-        if ($account_data['password'] == $account_data['password2']) {
+            $account_data = $request->validated();
+          //$account_data['password'] == $account_data['password2']
             $account = new User();
             $account->password = Hash::make($account_data['password']);
             $account->email = $account_data['email'];
@@ -28,10 +28,11 @@ class UserController extends Controller
             $account->surname = $account_data['surname'];
             $account->birthday = $account_data['birthday'];
             $account->save();
-        }
+
+            // авторизация после регистрации
+            Auth::login($account);
+
         return redirect(route('index'));
-
-
     }
 
     public function loginForm()

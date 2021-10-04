@@ -20,7 +20,8 @@ body {
 
 
 .background {
-    background-image: url(" /task-manager/public/picture/1.jpg");
+    background-image: url("/picture/1.jpg"); /*task-manager/public/   вставить если в локал хосте не прямой путь  DocumentRoot "/xampp/htdocs/task-manager/public"
+<Directory "/xampp/htdocs/task-manager/public">*/
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
