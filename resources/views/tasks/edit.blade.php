@@ -21,6 +21,9 @@
         @method('PUT')
 
         <div class="mb-3">
+            @isset($task->file)
+            <img src="{{ asset($task->file->path) }}" />
+            @endisset
             <label for="formFile" class="form-label">Заменить Изображение</label>
             <input type="file" class="form-control" id="formFile" name="file">
         </div>

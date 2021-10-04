@@ -8,6 +8,11 @@
     @foreach($list as $item)
      <div class="col-3">
         <div class="card mb-5">
+            <div>
+                @isset($item->file)
+                    <img src="{{ asset($item->file->path) }}" />
+                @endisset
+            </div>
             <div class="card-body">
             <h5 class="card-title">{{$item->title}}</h5>
             <p class="card-text">{{$item->preview_text}}</p>

@@ -4,6 +4,11 @@
 
 @section('content')
     <div>
+        <div class="mb-3">
+            @isset($task->file)
+                <img src="{{ asset($task->file->path) }}" />
+            @endisset
+        </div>
      <h1>{{$task->title}}</h1>
      <p>{{$task->detail_text}}</p>
      <p>Статус задачи:{{$status->name}}</p>

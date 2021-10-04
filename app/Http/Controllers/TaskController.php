@@ -156,32 +156,41 @@ class TaskController extends Controller
         $task->status_id = $data['status'];
         //сохраняем в базе
         $task->save();
-        //удалить все мини-задачи для текущей задачи
-        $task->miniss()->delete();
-        //сохраняем мини-задачи из формы
-        foreach ($data['mini'] as $mini)
-        {
-            if (strlen($mini) > 0)
-            {
-                $miniModel = new Mini();
-                $miniModel->text = $mini;
-                $miniModel->task_id = $task->id; // привязываю к задаче
-                $miniModel->save();
+
+        if(isset ($data['mini'])) {
+            //удалить все мини-задачи для текущей задачи
+            $task->miniss()->delete();
+            //сохраняем мини-задачи из формы
+            foreach ($data['mini'] as $mini) {
+                if (strlen($mini) > 0) {
+                    $miniModel = new Mini();
+                    $miniModel->text = $mini;
+                    $miniModel->task_id = $task->id; // привязываю к задаче
+                    $miniModel->save();
+                }
             }
         }
+        //Если файл был загружен с формы
          if (isset($data['file'])) {
 
-         }
-           //Привязка файла
-          //  1.Сохраняем файл в папке images
-       $path = $data['file']->store('images');
-        //  2.Сохраняем файл в базу
-       $file=new File();
-       $file->task_id = $task->id;
-       $file->path = $path;
-       $file->name = $data['file']->getClientOriginalName();
-       $file->mime = $data['file']->getClientMimeType();
-       $file->save();
+             //Сохраняю загружженый файл с формы
+             $path=$data['file']->store('images');
+
+             //Получим текущий файл, который был привязан к данной задаче
+            $file = $task->file;
+
+           //Если у задачи не был привзял старый файл
+            if (!isset($file)) {
+                // создается новый
+                $file = new File();
+                $file->task_id = $task->id;
+            }
+             //Заполняем данные
+                $file->path = $path;
+                $file->name = $data['file']->getClientOriginalName();
+                $file->mime = $data['file']->getClientMimeType();
+                $file->save();
+            }
 
         //редирект на страницу с детальным опис
         return redirect(route('tasks.show', ['task' => $id]));
