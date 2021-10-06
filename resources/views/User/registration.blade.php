@@ -15,8 +15,18 @@
         </div>
     @endif
 
-    <form method="post" action="{{route('User.registration')}}">
+    <form method="post" action="{{route('User.registration')}}"  enctype="multipart/form-data">
         @csrf
+
+        <div class="mb-3">
+                @isset($user->avatar)
+                    <img src="{{ asset($user->avatar->path) }}" />
+                @endisset
+                <label for="formFile" class="form-label">Ваше фото</label>
+                <input type="file" class="form-control" id="avatar" name="avatar">
+            </div>
+
+
         <div class="mb-3">
             <label for="name" class="form-label">Имя пользователя</label>
             <input type="text" class="name" id="name" name="name"  placeholder="Введите имя" value="{{ old ('name') }}">

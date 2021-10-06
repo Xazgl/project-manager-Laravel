@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserAuthRequest;
 use App\Http\Requests\UserLogin;
 use App\Http\Requests\UserRegister;
+use App\Models\Avatar;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,9 +30,22 @@ class UserController extends Controller
             $account->birthday = $account_data['birthday'];
             $account->save();
 
+
+        //Привязка файла
+        //Если файл был успешно загружен
+        if (isset($data['avatar'])) {
+            //  1.Сохраняем файл в папке images
+            $path = $data['avatar']->store('images');
+            //  2.Сохраняем файл в базу
+            $avatar = new Avatar();
+            $avatar->user_id =$account->id;
+            $avatar->path = $path;
+            $avatar->name = $data['avatar']->getClientOriginalName();
+            $avatar->mime = $data['avatar']->getClientMimeType();
+            $avatar->save();}
+
             // авторизация после регистрации
             Auth::login($account);
-
         return redirect(route('index'));
     }
 

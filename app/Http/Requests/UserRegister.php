@@ -25,6 +25,7 @@ class UserRegister extends FormRequest
     public function rules()
     {
         return [
+            'avatar'=>['file','image','max:1024'],
             'email'=>['required','email','max:255','unique:users,email'],
             'password'=>['required','string','confirmed',Password::min(6) ->mixedCase()],
             'name'=>['required','string','max:255'],
@@ -36,6 +37,7 @@ class UserRegister extends FormRequest
     public function messages()
     {
         return  [
+
             'email.required'=>'Введите Логин',
             'email.unique'=>'Логин уже существует',
             'password.required'=>'Введите Пароль',

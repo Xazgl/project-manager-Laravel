@@ -19,5 +19,10 @@ class User extends \Illuminate\Foundation\Auth\User
     {
         return $this->belongsToMany(Task::class);
     }
+
+    public function avatar()
+    {
+        return $this->hasOne(avatar::class);
+    }
 }
 
