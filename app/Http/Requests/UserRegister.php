@@ -37,7 +37,7 @@ class UserRegister extends FormRequest
     public function messages()
     {
         return  [
-
+            'avatar.image'=>'Формат картинки не верный',
             'email.required'=>'Введите Логин',
             'email.unique'=>'Логин уже существует',
             'password.required'=>'Введите Пароль',
