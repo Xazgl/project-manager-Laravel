@@ -204,7 +204,17 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //получаем задачу из базы
+        $task=Task::find($id);
+        //удалить все мини-задачи для текущей задачи
+        $task->miniss()->delete();
+        //удаляем файлы
+        $task->file()->delete();
+        //удаляем связь с юзером
+        $task->users()->detach();
+        //удаление
+        $task->delete();
+        return redirect(route('tasks.index'));
     }
 
 }

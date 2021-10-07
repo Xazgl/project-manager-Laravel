@@ -59,6 +59,27 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+.btm_submit12 {
+    background-color: #340407;
+    font-family: 'Montserrat', sans-serif;
+    color: cornsilk;
+    border-radius: 30px;
+
+}
+
+.col-3 {
+    margin-top: 1rem;
+}
+.card {
+    font-family: 'Montserrat', sans-serif;
+    color:white;
+
+}
+.btm_submit12:hover {
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+
+}
 
 
 

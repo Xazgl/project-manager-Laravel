@@ -21,8 +21,14 @@
              @endforelse
           </ul>
 
-     <p><a href ="{{route('tasks.edit',['task'=>$task->id]) }}" class="btm_submit1" style="text-decoration: none">Редактировать</a></p>
-     <p><a href ="{{route('tasks.index')}}" class="btm_submit1" style="text-decoration: none">К списку задач</a></p>
+     <p><a href ="{{route('tasks.edit',['task'=>$task->id]) }}" class="btm_submit1" type="submit" style="text-decoration: none">Редактировать</a></p>
+     <p><a href ="{{route('tasks.index')}}"  type="submit" class="btm_submit1" style="text-decoration: none">К списку задач</a></p>
+
+     <form method="post" action="{{ route('tasks.destroy',['task'=>$task->id]) }}">
+     @csrf
+     @method('DELETE')
+         <button type="submit" class="btm_submit12">Удалить</button>
+      </form>
     </div>
 
 
