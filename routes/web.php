@@ -58,6 +58,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [UserController::class, 'auth'])->name('authUser');
 });
 
+Route::get('/tasks_trashed',[TaskController::class,'show_trash'])->name('show_trash');
+Route::put('/tasks_put{task}',[TaskController::class,'restore'])->name('restore');
 
 Route::middleware('auth')->group(function () {
     Route::get('/logout',[UserController::class,'logout'])->name('exit');

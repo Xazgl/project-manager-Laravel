@@ -45,6 +45,9 @@
                     <li class="nav-item">
                          <a class="nav-link" href="{{ route('user.show',['id'=>Auth::id()]) }}">{{ Auth::user()->name }}</a>
                     </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="{{ Route('show_trash') }}">Удаленные задачи</a>
+                     </li>
                     @endauth
 
                     @guest()
@@ -54,6 +57,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ Route('loginForm') }}">Войти</a>
                     </li>
+
+
                     @endguest
 
                 </ul>

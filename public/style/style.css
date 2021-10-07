@@ -67,6 +67,14 @@ body {
 
 }
 
+.btm_submit11 {
+    background-color: #0c0d34;
+    font-family: 'Montserrat', sans-serif;
+    color: cornsilk;
+    border-radius: 30px;
+
+}
+
 .col-3 {
     margin-top: 1rem;
 }
@@ -107,3 +115,10 @@ body {
     margin-top: 1rem;
 }
 
+.table {
+    margin-top: 1rem;
+    font-family: 'Montserrat', sans-serif;
+
+
+
+}

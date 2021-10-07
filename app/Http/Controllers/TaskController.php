@@ -205,18 +205,44 @@ class TaskController extends Controller
     public function destroy($id)
     {
         //получаем задачу из базы
-        $task=Task::find($id);
+        $task = Task::withTrashed()->find($id);
+         // если уже удалена
+        if ($task->trashed()) {
+
         //удалить все мини-задачи для текущей задачи
         $task->miniss()->delete();
         //удаляем файлы
         $task->file()->delete();
         //удаляем связь с юзером
         $task->users()->detach();
+        //
+        $task->forceDelete();
+        } else {
         //удаление
         $task->delete();
+        }
         return redirect(route('tasks.index'));
     }
 
+
+
+    public function show_trash() {
+        $trash = Auth::user()->tasks()->onlyTrashed()
+        ->get();
+
+        return view(
+            'tasks.trash',
+            ['list' => $trash]
+        );
+    }
+
+
+    public function restore($id)
+    {
+        $task = Task::withTrashed()->find($id);
+        $task->restore();
+        return redirect(route('show_trash'));
+    }
 }
 
 
