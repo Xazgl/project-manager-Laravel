@@ -33,15 +33,15 @@ class UserController extends Controller
 
         //Привязка файла
         //Если файл был успешно загружен
-        if (isset($data['avatar'])) {
+        if (isset($account_data['avatar'])) {
             //  1.Сохраняем файл в папке images
-            $path = $data['avatar']->store('images');
+            $path = $account_data['avatar']->store('images');
             //  2.Сохраняем файл в базу
             $avatar = new Avatar();
             $avatar->user_id =$account->id;
             $avatar->path = $path;
-            $avatar->name = $data['avatar']->getClientOriginalName();
-            $avatar->mime = $data['avatar']->getClientMimeType();
+            $avatar->name = $account_data['avatar']->getClientOriginalName();
+            $avatar->mime = $account_data['avatar']->getClientMimeType();
             $avatar->save();}
 
             // авторизация после регистрации

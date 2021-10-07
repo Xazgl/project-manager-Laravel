@@ -65,4 +65,5 @@
 @section('scripts')
     @parent
 
+    </script>
 @endsection
