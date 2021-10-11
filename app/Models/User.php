@@ -24,5 +24,11 @@ class User extends \Illuminate\Foundation\Auth\User
     {
         return $this->hasOne(avatar::class);
     }
+
+    public function project()
+    {
+        return $this->belongsToMany(project::class);
+    }
+
 }
 

@@ -8,6 +8,7 @@ use App\Models\File;
 use App\Models\Mini;
 use App\Models\Status;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -118,7 +119,7 @@ class TaskController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -129,9 +130,6 @@ class TaskController extends Controller
             'statusList' => $statuses
         ]);
 
-
-
-
     }
 
     /**
@@ -139,7 +137,7 @@ class TaskController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function update(TaskUpdateRequest $request, $id)
     {
@@ -200,7 +198,7 @@ class TaskController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function destroy($id)
     {
@@ -244,15 +242,6 @@ class TaskController extends Controller
         return redirect(route('show_trash'));
     }
 }
-
-
-
-
-
-
-
-
-
 
 
 

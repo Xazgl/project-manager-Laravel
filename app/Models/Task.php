@@ -31,4 +31,10 @@ class Task extends Model
     {
         return $this->hasone(File::class);
     }
+
+
+    public function  project()
+    {
+        return $this->belongsTo((project::class));
+    }
 }

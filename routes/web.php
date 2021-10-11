@@ -4,6 +4,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +49,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('tasks',TaskController::class)->middleware('auth');
 
+
 Route::get('/',[IndexController::class,'index'])->name('index');
 
 Route::middleware('guest')->group(function () {
@@ -64,4 +66,24 @@ Route::put('/tasks_put{task}',[TaskController::class,'restore'])->name('restore'
 Route::middleware('auth')->group(function () {
     Route::get('/logout',[UserController::class,'logout'])->name('exit');
     Route::get('/user',[UserController::class,'show'])->name('user.show');
+    Route::get('/tasks_trashed',[TaskController::class,'show_trash'])->name('show_trash');
+    Route::put('/tasks_put{task}',[TaskController::class,'restore'])->name('restore');
+
 });
+
+//project
+
+Route::post('/project/create',[ProjectController::class,'store_project'])->name('store_project');
+
+Route::put('/project/update/{id}',[ProjectController::class,'update'])->name('update');
+
+Route::Get('/project/update/{id}',[ProjectController::class,'getUpdate'])->name('getUpdate');
+
+Route::delete('/project/delete/{id}',[ProjectController::class,'destroy'])->name('destroy');
+
+Route::Get('/project',[ProjectController::class,'index'])->name('list');
+
+Route::Get('/project/{id}',[ProjectController::class,'show'])->name('show');
+
+Route::get('/project_trashed',[ProjectController::class,'show_trash_project'])->name('show_trash_project');
+Route::put('/project_put{project}',[ProjectController::class,'restore'])->name('restore');
