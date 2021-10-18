@@ -15,17 +15,17 @@ class User extends \Illuminate\Foundation\Auth\User
 
     protected $fillable = ['name', 'surname', 'birthday', 'email', 'password'];
 
-    public function tasks()
-    {
-        return $this->belongsToMany(Task::class);
-    }
+    //  public function tasks()
+    // {
+    //   return $this->belongsToMany(Task::class);
+    //}
 
     public function avatar()
     {
         return $this->hasOne(avatar::class);
     }
 
-    public function project()
+    public function projects()
     {
         return $this->belongsToMany(project::class);
     }

@@ -16,9 +16,9 @@ class StatusesSeeder extends Seeder
     {
         //
         $name=['Новая','В работе','Закончена'];
-        foreach($name as $name) {
+        foreach($name as $name1) {
             DB::table('statuses')->insert([
-                'name'=>$name
+                'name'=>$name1
 
             ]);
 

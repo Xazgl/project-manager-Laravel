@@ -75,21 +75,32 @@ body {
 
 }
 
-.col-3 {
-    margin-top: 1rem;
+.col-12{
+    max-width: 100%;
+    margin-top: 2rem;
 }
 .card {
     font-family: 'Montserrat', sans-serif;
     color:white;
 
 }
-.btm_submit12:hover {
+.card-title {
+    text-align: center;
+}
+
+.card-btn {
+    margin-bottom: auto;
+}
+
+ .btm_submit12:hover {
     border-radius: 50px;
     font-family: 'Montserrat', sans-serif;
 
 }
 
+#newTaskBtn {
 
+}
 
 .footer {
     /* Sticky footer */
@@ -106,19 +117,17 @@ body {
 .footer-words {
     font-family: 'Montserrat', sans-serif;
     color:white;
+
 }
 
 
-
-.mb-3 {
-    margin-bottom: 1rem!important;
-    margin-top: 1rem;
-}
 
 .table {
     margin-top: 1rem;
     font-family: 'Montserrat', sans-serif;
-
-
-
 }
+.mb-3 {
+    margin-top:1rem;
+}
+
+

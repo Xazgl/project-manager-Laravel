@@ -32,7 +32,7 @@
 
         <div class="mb-3">
             <label for="password" class="form-label">Пароль</label>
-            <input type="text" class="password" id="password" name="password"  placeholder="Введите пароль">
+            <input type="password" class="password" id="password" name="password"  placeholder="Введите пароль">
         </div>
 
 

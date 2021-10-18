@@ -34,10 +34,10 @@
                     </li>
                     @auth()
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ Route('tasks.index') }}">Мои задачи</a>
+                        <a class="nav-link" href="{{ Route('project.index') }}">Мои проекты</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ Route('tasks.create') }}">Создать задачу</a>
+                       <a class="nav-link" href="{{ Route('project.create') }}">Создать проект</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ Route('exit') }}">Выйти</a>
@@ -73,11 +73,12 @@
 
 
     <div class="footer">
-        <div class="footer-words">
+        <div class="footer-words" >
       <ul>
         <li>Менеджер задач</li>
         <li>2021(C)</li>
       </ul>
+
         </div>
     </div>
 
@@ -98,12 +99,25 @@
   @section('scripts')
 
 
+    <script src="https://js.cx/libs/animate.js"></script>
+
+
+
+
+
+
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script>
         $(".footer").fadeIn(3000);
     </script>
+
+
+
+
+
     @show
   </body>
 </html>

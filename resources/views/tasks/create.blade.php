@@ -14,7 +14,7 @@
 
 
 @section('content')
-  <form method="post" action="{{ route('tasks.store') }}"  enctype="multipart/form-data">
+  <form method="post" action="{{ route('tasks.store',['id'=>$id]) }}"  enctype="multipart/form-data">
       @csrf
 
       <div class="mb-3">

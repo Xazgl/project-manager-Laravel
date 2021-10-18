@@ -2,11 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProjectCreateRequest;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\Project;
+use App\Models\File;
+use App\Models\Project;
+use App\Models\Mini;
+use App\Models\Status;
+use App\Models\Task;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
+
+    public function index()
+    {
+        $projects = Auth::user()->projects()//->select('id', 'name', 'created_at', 'updated_at')
+        ->get();
+
+
+
+        return view(
+            'project.index',
+            ['list' => $projects],
+
+        );
+    }
+
     public function create()
     {
         return view('project.create');
@@ -18,134 +40,47 @@ class ProjectController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store_project(ProjectCreateRequest $request)
+    public function store(ProjectCreateRequest $request)
     {
-        $data = $request->validated();
+        $data = $request->all();
 
-        // Получение объекта статуса "Новая"
-        $status = Status::find(1);
-        //Привязка к статусу объекта задачи
-        $project = $status->project()->create([
-            'name' => $data['name'],
-        ]);
-
+        /*  $project = $this->projects()->create([
+            'name' => $data['name']
+       ]); */
+        $project = new Project();
+        $project->name = $data['name'];
+        $project->save();
 
         $project->users()->attach(Auth::id());
-
 
         return redirect(route('project.index'));
     }
 
-    /*
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
-    public function show($id)
-
+    public function project_task_show($id)
     {
 
-        $project = Project::select('id', 'name', 'status_id','tasks')->find($id);
-        foreach ($project->tasks as $task) {
+            $project = Project::select('id')->find($id);
+            if (Auth::user()->can('view', $project)) {  // c помощью can вызывается функция политки тру или фолс
+                return view('project.show', ['project' => $project]);
+            } else {
+                return redirect(route('project.index'));
+            }
+        }
 
-        };
-        $status = $project > status;
+
+
+    /*public function task.show($id, $task_id)
+    {
+
+        $project = Project::select('id', 'name')->find($id);
+        $task = $project->tasks()->find($task_id);
         if (Auth::user()->can('view', $project)) {
-            return view('project.show', ['project' => $project, 'status' => $status]);
+            return view('project.show', ['project' => $project, 'task' => $task]);
         } else {
             return redirect(route('project.index'));
         }
-        $user = App\User::find(1);
-
-        foreach ($user->roles as $role);
+    }*/
     }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $project = Project::select('id', 'name', 'status_id')->find($id);
-        $statuses = Status::get();
-        return view('project.edit', [
-            'project' => $project,
-            'statusList' => $statuses
-        ]);
-    }
-
-    public function update(ProjectUpdateRequest $request, $id)
-    {
-        //СОбрали все данные с формы
-        $data = $request->validated();
-
-        //Получили необходимую задачу из базы,которую будем редактировать
-        $project = Project::find($id);
-
-        //Перезаписываем данные
-        $project->title = $data['name'];
-        $project->status_id = $data['status'];
-        //сохраняем в базе
-        $project->save();
-
-
-
-
-
-        //редирект на страницу с детальным опис
-        return redirect(route('project.show', ['project' => $id]));
-}
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-{
-    //получаем задачу из базы
-    $project = project::withTrashed()->find($id);
-    // если уже удалена
-    if ($project->trashed()) {
-
-        //удаляем связь с юзером
-        $project->users()->detach();
-        //удаляем связь с задачами
-        $project->tasks()->detach();
-        $project->forceDelete();
-    } else {
-        //удаление
-        $$project->delete();
-    }
-    return redirect(route('project.index'));
-}
-
-
-
-    public function show_trash_project() {
-        $trash = Auth::user()->project()->onlyTrashed()
-            ->get();
-
-        return view(
-            'project.trash',
-            ['list' => $project]
-        );
-    }
-
-
-    public function restore($id)
-    {
-        $project = project::withTrashed()->find($id);
-        $project->restore();
-        return redirect(route('show_trash_project'));
-    }
-}
 
 

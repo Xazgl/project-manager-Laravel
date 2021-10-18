@@ -1,26 +1,32 @@
+@extends('layouts.main')
 
-@section('title','Проект')
+@section('title','Задачи проекта')
 
 @section('content')
-    <div>
-        <div class="mb-3">
-        <h1>{{$project->name}}</h1>
-        <p>Статус проекта:{{$status->name}}</p>
-        <p><a href ="{{route('project.edit',['project'=>$project->id]) }}" class="btm_submit1" type="submit" style="text-decoration: none">Редактировать</a></p>
-        <p><a href ="{{route('project.index')}}"  type="submit" class="btm_submit1" style="text-decoration: none">К списку проектов</a></p>
-
-        <form method="post" action="{{ route('project.destroy',['project'=>$project->id]) }}">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btm_submit12">Удалить</button>
-        </form>
+    <div class="row">
+     @foreach($project->tasks as $item) {{--обращение к таблице через -> один к многим --}}
+       <div class="col-12 col-xs-12 col-sm-12 col-md-4 col-lg-2 col-xl-2">
+        <div class="card card-dark bg-dark mb-5">
+            <div class="card-body">
+            <h5 class="card-title">{{ $item->title }}</h5>
+            <p class="card-text">{{ $item->preview_text }}</p>
+            <a href="{{ route('tasks.show',['id'=>$project->id,'task_id'=>$item->id]) }}" class="btn btn-primary">Подробнее</a>
+    {{--<form method="post" action="{{ route('tasks.destroy',['task'=>$item->id]) }}">
+     @csrf
+     @method('DELETE')
+     <button type="submit" class="btn btn-danger" id="danger">Удалить</button>
+     </form>--}}
+            </div>
+        </div>
+       </div>
+    @endforeach
     </div>
 
-
+     <a href="{{ route('task.create',['id'=>$project->id]) }}" class="btn btn-dark" id="newTaskBtn">Создать новую задачу</a>
 
 @endsection
 
 @section('scripts')
-    @parent
+@parent
 
 @endsection

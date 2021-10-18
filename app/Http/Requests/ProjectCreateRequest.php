@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-
+use App\Models\Project;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProjectCreateRequest extends FormRequest
@@ -24,8 +24,7 @@ class ProjectCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>['required','string','max:255'],
-            'task'=>['required','string','max:255']
+            'name'=>['required','string','max:255']
         ];
     }
 
@@ -33,7 +32,6 @@ class ProjectCreateRequest extends FormRequest
     {
         return  [
             'name.required'=>'Не заполнено название задачи',
-
         ];
     }
 }

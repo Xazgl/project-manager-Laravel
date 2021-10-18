@@ -6,6 +6,7 @@ use App\Http\Requests\TaskCreateRequest;
 use App\Http\Requests\TaskUpdateRequest;
 use App\Models\File;
 use App\Models\Mini;
+use App\Models\Project;
 use App\Models\Status;
 use App\Models\Task;
 use App\Models\User;
@@ -32,9 +33,10 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('tasks.create');
+        $project=Project::find($id);
+        return view('tasks.create',['id'=>$project->id]);
     }
 
     /**
@@ -43,8 +45,9 @@ class TaskController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
- public function store(TaskCreateRequest $request)
+ public function store($id,TaskCreateRequest $request)
    {
+       $project=Project::find($id);
        $data=$request->validated();
 
     //$task= new Task();
@@ -61,9 +64,9 @@ class TaskController extends Controller
      $task=$status->tasks()->create([
          'title' =>$data['title'],
          'preview_text' =>$data['preview'],
-         'detail_text' => $data['detail']
+         'detail_text' => $data['detail'],
+         'project_id'=>$id
      ]);
-     $task->users()->attach(Auth::id());
      //Привязка мини задач
        //$data['mini']
        if (isset ($data['mini'])) {
@@ -91,7 +94,7 @@ class TaskController extends Controller
            $file->mime = $data['file']->getClientMimeType();
            $file->save();
        }
-       return redirect(route('tasks.index'));
+       return redirect(route('project_tasks.show',['id'=>$id]));
  }
 
     /*
@@ -101,51 +104,44 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function show($id)
 
+ public function show($id, $task_id)
     {
 
-            $task = Task::select('id', 'title', 'detail_text', 'status_id')->find($id);
+        $project=Project::find($id);
+            $task = Task::select('id', 'title','preview_text', 'detail_text', 'status_id')->find($task_id);
             $status = $task->status;
-        if (Auth::user()->can('view',$task)) {
-            return view('tasks.show', ['task' => $task, 'status' => $status]);
+        if (Auth::user()->can('view',$project)) {  // c помощью can вызывается функция политки тру или фолс
+            return view('tasks.show', ['task' => $task, 'status' => $status,'project' => $project,'task_id'=>$task->id,'id'=>$project->id]);
         } else {
-            return redirect(route('tasks.index'));
+            return redirect(route('project_tasks.show',['id'=>$project->id]));
         }
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit($id, $task_id)
     {
-        $task = Task::select('id', 'title', 'detail_text', 'preview_text', 'status_id')->find($id);
+        $project=Project::find($id);
+        $task = Task::select('id', 'title', 'detail_text', 'preview_text', 'status_id')->find($task_id);
         $statuses = Status::get();
         return view('tasks.edit', [
-            'task' => $task,
-            'statusList' => $statuses
+            'id'=>$project->id,
+            'task_id' => $task->id,
+            'statusList' => $statuses,
+            'task'=>$task
         ]);
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
-     */
-    public function update(TaskUpdateRequest $request, $id)
+
+    public function update( $id,$task_id,TaskUpdateRequest $request)
     {
         //СОбрали все данные с формы
         $data = $request->validated();
 
+        $project=Project::find($id);
         //Получили необходимую задачу из базы,которую будем редактировать
-        $task = Task::find($id);
+        $task = Task::find($task_id);
 
         //Перезаписываем данные
         $task->title = $data['title'];
@@ -191,7 +187,7 @@ class TaskController extends Controller
             }
 
         //редирект на страницу с детальным опис
-        return redirect(route('tasks.show', ['task' => $id]));
+        return redirect(route('tasks.show', ['id'=>$project->id,'task_id' => $task->id]));
     }
 
     /**

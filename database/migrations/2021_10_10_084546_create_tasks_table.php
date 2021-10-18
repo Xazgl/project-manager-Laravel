@@ -18,6 +18,7 @@ class CreateTasksTable extends Migration
             $table->string('title');
             $table->string('preview_text');
             $table->text('detail_text');
+            $table->foreignId('project_id')->references('id')->on('projects');
             $table->timestamps();
         });
     }

@@ -10,15 +10,14 @@ class Project extends Model
 {
     use  HasFactory;
 
-    protected $table = 'project';//на какую таблицу должна смотреть наша модель
+    protected $table = 'projects';//на какую таблицу должна смотреть наша модель
 
-    protected $fillable = ['name','task'];
+    protected $fillable = ['name'];
 
     public function tasks()
     {
-        return $this->belongsToMany(Task::class);
-        // $project = App\User::find(1);
-        //foreach ($project->tasks as $task)
+        return $this->hasMany(Task::class);
+
     }
 
     public function users()
