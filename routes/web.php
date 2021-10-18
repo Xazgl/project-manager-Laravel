@@ -71,7 +71,7 @@ Route::middleware('auth')->group(function () {
 
 });
 
-//project
+//project 3
 Route::middleware('auth')->group(function () {
 Route::get('/projects',[ProjectController::class,'index'])->name('project.index');//вбюшка список проектов
 
