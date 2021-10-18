@@ -63,9 +63,9 @@ body {
 .btm_submit12 {
     background-color: #340407;
     font-family: 'Montserrat', sans-serif;
-    color: cornsilk;
-    border-radius: 30px;
 
+    border-radius: 30px;
+    MARGIN-BOTTOM: 10PX;
 }
 
 .btm_submit11 {
@@ -84,6 +84,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     color:white;
 
+
 }
 .card-title {
     text-align: center;
@@ -91,18 +92,15 @@ body {
 .card-body {
     text-align: center;
 }
-.btn btn-primary {
-    margin-bottom: 10px;
 
+
+.btn {
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
 }
 
-.btn btn-secondary {
-    margin-bottom: 10px;
-}
 
-.btn btn-danger {
-    margin-bottom: 10px;
-}
 
  .btm_submit12:hover {
     border-radius: 50px;
