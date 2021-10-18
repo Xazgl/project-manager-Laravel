@@ -2,6 +2,13 @@
 
 @section('title','Редактор')
 
+@if($errors->any())
+    <div class="alert alert-danger" role="alert">
+        @foreach($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+@endif
 @section('content')
 
 
@@ -23,13 +30,13 @@
 
         <div class="mb-3">
             <label for="title" class="form-label">Статус задачи</label>
-        <div class="form-select" name="status" aria-label="Default select example">
+        <select class="form-select" name="status" aria-label="Default select example">
             @foreach($statusList as $status)
-            <option value="{{ $status->id }}" @if($status->id==$task->status->id) <select @endif {{ $status->name }}></option>
+            <option value="{{ $status->id }}" @if($status->id==$task->status->id) checked @endif> {{ $status->name }}</option>
             @endforeach
         </select>
         </div>
-        </div>
+
 
         <div class="mb-3">
             <label for="title" class="form-label">Название</label>
