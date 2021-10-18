@@ -25,6 +25,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
+    min-height: 100vh;
 
 }
 
@@ -87,9 +88,20 @@ body {
 .card-title {
     text-align: center;
 }
+.card-body {
+    text-align: center;
+}
+.btn btn-primary {
+    margin-bottom: 10px;
 
-.card-btn {
-    margin-bottom: auto;
+}
+
+.btn btn-secondary {
+    margin-bottom: 10px;
+}
+
+.btn btn-danger {
+    margin-bottom: 10px;
 }
 
  .btm_submit12:hover {
