@@ -47,13 +47,13 @@ use Illuminate\Support\Facades\Route;
 //Route::Get('/task/{id}',[TaskController::class,'show'])->name('show');
 
 
-Route::resource('tasks',TaskController::class)->middleware('auth');
+
 
 
 Route::get('/',[IndexController::class,'index'])->name('index');
 
 Route::middleware('guest')->group(function () {
-    Route::post('/registration', [UserController::class, 'reg_store'])->name('User.registration');
+    Route::post('/registration', [UserController::class, 'reg_store'])->name('user.registration');
     Route::get('/registration', [UserController::class, 'registration'])->name('user_reg');
 
     Route::get('/login', [UserController::class, 'loginForm'])->name('loginForm');
@@ -87,17 +87,17 @@ Route::Get('/project/{id}/{task_id}',[TaskController::class,'show'])->name('task
 
 Route::Get('/project/{id}/{task_id}/edit',[TaskController::class,'edit'])->name('task.edit')->whereNumber(['id','task_id']);//редактирование  задачи вьшка
 Route::put('/project/{id}/{task_id}/edit',[TaskController::class,'update'])->name('task.update')->whereNumber(['id','task_id']);//форма редактирования задачи
-
+Route::delete('/project/{id}/{task_id}/delete',[TaskController::class,'destroy'])->name('tasks.destroy');//удаление задачи
 
 Route::put('/project/update/{id}',[ProjectController::class,'update'])->name('update');
 
-Route::delete('/project/delete/{id}',[ProjectController::class,'destroy'])->name('destroy.project');
+
 
 
 
 Route::Get('/project/update/{id}',[ProjectController::class,'getUpdate'])->name('getUpdate');
 
-Route::delete('/project/{id}/delete',[ProjectController::class,'destroy'])->name('destroy');
+Route::delete('/project/{id}/delete',[ProjectController::class,'destroy'])->name('destroy.project');//удаление проекта
 
 
 

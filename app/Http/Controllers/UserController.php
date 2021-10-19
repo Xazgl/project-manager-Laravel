@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function registration()
     {
-        return view('User.registration');
+        return view('user.registration');
     }
 
     public function reg_store(UserRegister $request)

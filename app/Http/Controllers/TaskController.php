@@ -196,10 +196,12 @@ class TaskController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
-    public function destroy($id)
+    public function destroy ($id,$task_id)
     {
+        $project=Project::find($id);
+        //Получили необходимую задачу из базы,которую будем редактировать
         //получаем задачу из базы
-        $task = Task::withTrashed()->find($id);
+        $task = Task::withTrashed()->find($task_id);
          // если уже удалена
         if ($task->trashed()) {
 
@@ -207,15 +209,15 @@ class TaskController extends Controller
         $task->miniss()->delete();
         //удаляем файлы
         $task->file()->delete();
-        //удаляем связь с юзером
-        $task->users()->detach();
+        //удаляем связь с проектом
+        $task->projects()->detach();
         //
         $task->forceDelete();
         } else {
         //удаление
         $task->delete();
         }
-        return redirect(route('tasks.index'));
+        return redirect(route('project_tasks.show',['id'=>$project->id]));
     }
 
 
