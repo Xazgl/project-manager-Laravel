@@ -89,17 +89,15 @@ Route::Get('/project/{id}/{task_id}/edit',[TaskController::class,'edit'])->name(
 Route::put('/project/{id}/{task_id}/edit',[TaskController::class,'update'])->name('task.update')->whereNumber(['id','task_id']);//форма редактирования задачи
 
 
-
-
 Route::put('/project/update/{id}',[ProjectController::class,'update'])->name('update');
 
-
+Route::delete('/project/delete/{id}',[ProjectController::class,'destroy'])->name('destroy.project');
 
 
 
 Route::Get('/project/update/{id}',[ProjectController::class,'getUpdate'])->name('getUpdate');
 
-Route::delete('/project/delete/{id}',[ProjectController::class,'destroy'])->name('destroy');
+Route::delete('/project/{id}/delete',[ProjectController::class,'destroy'])->name('destroy');
 
 
 

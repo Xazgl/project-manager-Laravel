@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <form method="post" action="{{route('User.registration')}}"  enctype="multipart/form-data">
+    <form method="post" action="{{route('user.registration')}}"  enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">

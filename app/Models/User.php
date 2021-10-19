@@ -22,12 +22,12 @@ class User extends \Illuminate\Foundation\Auth\User
 
     public function avatar()
     {
-        return $this->hasOne(avatar::class);
+        return $this->hasOne(Avatar::class);
     }
 
     public function projects()
     {
-        return $this->belongsToMany(project::class);
+        return $this->belongsToMany(Project::class);
     }
 
 }

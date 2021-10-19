@@ -11,9 +11,12 @@
                     <div class="card-body">
                     <h5 class="card-title">{{$item->name}}</h5>
                     <a href="{{ route('project_tasks.show',['id'=>$item->id]) }}" class="btn btn-secondary" id ="btn_secondary">Задачи</a>
+
+                    <form method="post" action="{{ route('destroy.project',['id'=>$item->id]) }}">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger" id="danger">Удалить</button>
+                    </form>
                 </div>
             </div>
             </div>

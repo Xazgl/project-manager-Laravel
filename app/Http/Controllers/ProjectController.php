@@ -81,6 +81,47 @@ class ProjectController extends Controller
             return redirect(route('project.index'));
         }
     }*/
+    public function destroy($id)
+    {
+
+        //получаем проект из базы
+        $project = Project::withTrashed()->find($id);
+
+        // если уже удален
+        if ($project->trashed()) {
+
+            $project->tasks()->delete();
+            //удалить все задачи для текущего проекта
+
+            //удаляем связь с юзером
+            $project->users()->detach();
+            //
+            $project->forceDelete();
+        } else {
+            //удаление
+            $project->delete();
+        }
+        return redirect(route('project.index'));
+    }
+
+
+    public function project_trash() {
+        $trash = Auth::user()->projects()->onlyTrashed()
+            ->get();
+
+        return view(
+            'project.trash',
+            ['list' => $trash]
+        );
+    }
+    
+    public function restore($id)
+    {
+        $project= Task::withTrashed()->find($id);
+        $project->restore();
+        return redirect(route('show_trash_project'));
+    }
+
     }
 
 
