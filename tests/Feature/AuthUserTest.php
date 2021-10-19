@@ -10,7 +10,7 @@ class AuthUserTest extends TestCase
 {
     public function test_pageLogin()
     {
-        //Заходим на страницу авторизации пользователя
+        //Зvаходим на страницу авторизации пользователя
         $response=$this->get('/login');
         // Проверка
         $response->assertOK();
