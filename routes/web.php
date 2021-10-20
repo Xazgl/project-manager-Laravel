@@ -67,11 +67,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout',[UserController::class,'logout'])->name('exit');
     Route::get('/user',[UserController::class,'show'])->name('user.show');
 
-    Route::get('{avatar_id}',[UserController::class,'avatar'])->name('avatar');//маршрут для аватара
-    Route::post('{avatar_id}',[UserController::class,'avatar_update'])->name('avatar.update');//маршрут для аватара
 
     Route::get('/tasks_trashed',[TaskController::class,'show_trash'])->name('show_trash');
     Route::put('/tasks_put{task}',[TaskController::class,'restore'])->name('restore');
+
+    Route::get('{avatar_id}',[UserController::class,'avatar'])->name('avatar')->whereNumber(['avatar_id']);//маршрут для аватара
+    Route::post('{avatar_id}',[UserController::class,'avatar_update'])->name('avatar.update')->whereNumber(['avatar_id']);//маршрут для аватара
 
 });
 

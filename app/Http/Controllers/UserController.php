@@ -97,10 +97,13 @@ class UserController extends Controller
         if ($user_id===$id) {
             $avatar_img=$avatar->path();
             echo $avatar_img;
+        }else {
+            $avatar_img=null;
+            echo  "";
         }
 
     }
-    public function avatar_update ($id,$user_id, $request) {
+/* public function avatar_update ($id,$user_id, $request) {
 
         $data = $request->all();// собираем данные с формы
 
@@ -127,8 +130,12 @@ class UserController extends Controller
             $file->mime = $data['file']->getClientMimeType();
             $file->save();
         }
-    }
+    }*/
 }
+
+
+
+
 /* $user=User::select('id','email','password')
          ->where('email','=',$data['email'])
          ->first();
