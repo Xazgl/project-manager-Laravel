@@ -30,7 +30,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ Route('index') }}">Главная</a>
+                        <a class="nav-link active" aria-current="page" href="{{ Route('project.index') }}">Главная</a>
                     </li>
                     @auth()
                     <li class="nav-item">

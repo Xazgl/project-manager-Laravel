@@ -30,5 +30,6 @@ class User extends \Illuminate\Foundation\Auth\User
         return $this->belongsToMany(Project::class);
     }
 
+
 }
 

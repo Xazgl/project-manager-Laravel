@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectCreateRequest;
+use App\Models\Avatar;
 use Illuminate\Http\Request;
 use App\Models\File;
 use App\Models\Project;
@@ -92,6 +93,17 @@ class ProjectController extends Controller
 
             $project->tasks()->delete();
             //удалить все задачи для текущего проекта
+            {
+                $task = Task::withTrashed();
+                //удалить все мини-задачи для текущей задачи
+                $task->miniss()->delete();
+                //удаляем файлы
+                $task->file()->delete();
+                //удаляем связь с проектом
+                $task->projects()->detach();
+                //
+                $task->forceDelete();
+            }
 
             //удаляем связь с юзером
             $project->users()->detach();
@@ -114,13 +126,14 @@ class ProjectController extends Controller
             ['list' => $trash]
         );
     }
-    
+
     public function restore($id)
     {
-        $project= Task::withTrashed()->find($id);
+        $project= Project::withTrashed()->find($id);
         $project->restore();
         return redirect(route('show_trash_project'));
     }
+
 
     }
 

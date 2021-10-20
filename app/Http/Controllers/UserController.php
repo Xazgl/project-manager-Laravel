@@ -6,6 +6,7 @@ use App\Http\Requests\UserAuthRequest;
 use App\Http\Requests\UserLogin;
 use App\Http\Requests\UserRegister;
 use App\Models\Avatar;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -89,6 +90,16 @@ class UserController extends Controller
 
     }
 
+    public function avatar ($id,$user_id) // для отображения аватар путь в вьшку из базы
+    {
+        $avatar= Avatar::select ()->find($user_id);
+        $user=User::select()->find($id);
+        if ($user_id===$id) {
+            $avatar_img=$avatar->path();
+            echo $avatar_img;
+        }
+
+    }
 }
 /* $user=User::select('id','email','password')
          ->where('email','=',$data['email'])
