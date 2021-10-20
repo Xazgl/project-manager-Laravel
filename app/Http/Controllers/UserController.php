@@ -100,6 +100,34 @@ class UserController extends Controller
         }
 
     }
+    public function avatar_update ($id,$user_id, $request) {
+
+        $data = $request->all();// собираем данные с формы
+
+        $user=User::select()->find($id);
+        //Получили необходимый аватар из базы,который  будем редактировать
+        $avatar = Avatar::find($user_id);
+        if (isset($data['avatar'])) {
+
+            //Сохраняю загружженый файл с формы
+            $path=$data['avatar']->store('images');
+
+            //Получим текущий файл, который был привязан к данной задаче
+            $file = $user->avatar;
+
+            //Если у задачи не был привзял старый файл
+            if (!isset($file)) {
+                // создается новый
+                $file = new File();
+                $file->user_id = $user->id;
+            }
+            //Заполняем данные
+            $file->path = $path;
+            $file->name = $data['file']->getClientOriginalName();
+            $file->mime = $data['file']->getClientMimeType();
+            $file->save();
+        }
+    }
 }
 /* $user=User::select('id','email','password')
          ->where('email','=',$data['email'])
