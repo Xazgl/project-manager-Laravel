@@ -24,7 +24,7 @@
      <p><a href ="{{route('task.edit',['id'=>$project->id,'task_id'=>$task->id]) }}" class="btm_submit1" type="submit" style="text-decoration: none">Редактировать</a></p>
      <p><a href ="{{route('project.index')}}"  type="submit" class="btm_submit1" style="text-decoration: none">К списку проектов</a></p>
 
-     <form method="post" action="{{ route('tasks.destroy',['task'=>$task->id]) }}">
+     <form method="post" action="{{ route('task.destroy',['id'=>$project->id,'task_id'=>$task->id]) }}">
 
      @csrf
      @method('DELETE')

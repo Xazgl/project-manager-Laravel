@@ -223,7 +223,8 @@ class TaskController extends Controller
 
 
     public function show_trash() {
-        $trash = Auth::user()->tasks()->onlyTrashed()
+
+        $trash = Auth::user()->projects()->tasks()->onlyTrashed()
         ->get();
 
         return view(

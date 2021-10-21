@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Project extends Model
 
 {
-    use  HasFactory;//SoftDeletes как добавить?
+    use  HasFactory,SoftDeletes;//SoftDeletes как добавить?
 
     protected $table = 'projects';//на какую таблицу должна смотреть наша модель
 
