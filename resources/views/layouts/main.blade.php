@@ -39,14 +39,17 @@
                     <li class="nav-item">
                        <a class="nav-link" href="{{ Route('project.create') }}">Создать проект</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ Route('exit') }}">Выйти</a>
-                    </li>
+
                     <li class="nav-item">
                          <a class="nav-link" href="{{ route('user.show',['id'=>Auth::id()]) }}">{{ Auth::user()->name }}</a>
                     </li>
+
                     <li class="nav-item">
-                            <a class="nav-link" href="{{ Route('show_trash') }}">Удаленные задачи</a>
+                            <a class="nav-link" href="{{ Route('exit') }}">Выйти</a>
+                    </li>
+
+                    <li class="nav-item">
+                            <a class="nav-link" href="{{ Route('show_trash_project') }}">Удаленные Проекты</a>
                      </li>
                     @endauth
 

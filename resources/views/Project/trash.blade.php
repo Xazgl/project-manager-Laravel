@@ -16,7 +16,7 @@
                 <th scope="col">Название</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
-                <th scope="col"></th>
+
 
 
             </tr>
@@ -26,7 +26,7 @@
                 <th scope="row">1</th>
                 <td>{{$item->name}}</td>
                 <td>
-                    <form method="post" action="{{ route('project.destroy',['project'=>$item->id]) }}">
+                    <form method="post" action="{{ route('destroy.project',['id'=>$item->id]) }}">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btm_submit12">Удалить</button>

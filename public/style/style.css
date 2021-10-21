@@ -63,7 +63,7 @@ body {
 .btm_submit12 {
     background-color: #340407;
     font-family: 'Montserrat', sans-serif;
-
+    color:white;
     border-radius: 30px;
     MARGIN-BOTTOM: 10PX;
 }
@@ -98,8 +98,14 @@ body {
     margin-bottom: 10px;
     font-family: 'Montserrat', sans-serif;
     text-align: center;
+
 }
 
+#newTaskBtn {
+    margin: 10px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
 
 
  .btm_submit12:hover {

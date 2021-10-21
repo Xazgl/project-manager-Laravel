@@ -117,7 +117,7 @@ class ProjectController extends Controller
     }
 
 
-    public function project_trash() {
+    public function show_trash_project() {
         $trash = Auth::user()->projects()->onlyTrashed()
             ->get();
 

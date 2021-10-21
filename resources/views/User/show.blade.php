@@ -16,7 +16,7 @@
             @isset($user->avatar)
                 <img src="{{ asset($user->avatar->path) }}"/>
             @endisset
-            <label for="formFile" class="form-label">Заменить Изображение</label>
+            <label for="formFile" class="form-label"><b>Заменить Изображение</b></label>
             <input type="file" class="form-control" id="formFile" name="file">
         </div>
     </form>
