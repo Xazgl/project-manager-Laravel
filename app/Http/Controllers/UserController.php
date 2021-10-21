@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserAuthRequest;
 use App\Http\Requests\UserLogin;
 use App\Http\Requests\UserRegister;
+use App\Http\Requests\UserUpdate;
 use App\Models\Avatar;
 use App\Models\Project;
 use App\Models\User;
@@ -103,13 +104,13 @@ class UserController extends Controller
         }
     }
 
-    public function update( $id,UserRegister $request)
+    public function update( UserUpdate $request)
     {
         //СОбрали все данные с формы
         $data = $request->validated();
 
         //Получили необходимую задачу из базы,которую будем редактировать
-        $account= User::find($id);
+        $account= User::find(Auth::id()); // без передачи id
 
         //Перезаписываем данные
         $account->email = $data['email'];
@@ -118,7 +119,7 @@ class UserController extends Controller
         //сохраняем в базе
         $account->save();
 
-
+        return view('user.show',['user'=> $account]);
 
 
 
