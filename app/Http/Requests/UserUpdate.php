@@ -20,7 +20,7 @@ class UserUpdate extends FormRequest
 {
     return [
         'avatar'=>['file','image','max:1024'],
-        'email'=>['required','email','max:255','unique:users,email'],
+
         'name'=>['required','string','max:255'],
         'surname'=>['required','string','max:255'],
 
@@ -31,11 +31,7 @@ class UserUpdate extends FormRequest
 {
     return  [
         'avatar.image'=>'Формат картинки не верный',
-        'email.required'=>'Введите Логин',
-        'email.unique'=>'Логин уже существует',
-        'email.max'=>'Логин больше 255 символов ',
-        'email.name'=>'Введите Имя',
-        'email.surname'=>'Введите Фамилию'
+
     ];
 }
 

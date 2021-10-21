@@ -62,6 +62,11 @@
              //Логика нажатия на кнопку
              $("#mini-list").append('<li><input  class="form-control" type="text" name="mini[]"></li>')
          });
+
+         $('.del-mini').on("click",function(event) {
+             event.preventDefault();
+             $(this).parent().remove();
+         });
     </script>
 @endsection
 

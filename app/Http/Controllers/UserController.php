@@ -86,8 +86,8 @@ class UserController extends Controller
     public function show()
     {
 
-          $data=user::select('id','name','surname','birthday','email')->find(Auth::id());
-          return view('user.show',['user'=>$data]);
+
+          return view('user.show');
 
     }
 
@@ -104,7 +104,7 @@ class UserController extends Controller
         }
     }
 
-    public function update( UserUpdate $request)
+    public function update(UserUpdate $request)
     {
         //СОбрали все данные с формы
         $data = $request->validated();
@@ -113,13 +113,27 @@ class UserController extends Controller
         $account= User::find(Auth::id()); // без передачи id
 
         //Перезаписываем данные
-        $account->email = $data['email'];
+
         $account->name = $data['name'];
         $account->surname = $data['surname'];
+
+        //Привязка файла
+        //Если файл был успешно загружен
+        if (isset($data['avatar'])) {
+            //  1.Сохраняем файл в папке images
+            $path = $data['avatar']->store('images');
+            //  2.Сохраняем файл в базу
+            $avatar = new Avatar();
+            $avatar->user_id =$account->id;
+            $avatar->path = $path;
+            $avatar->name = $data['avatar']->getClientOriginalName();
+            $avatar->mime = $data['avatar']->getClientMimeType();
+            $avatar->save();
+        }
         //сохраняем в базе
         $account->save();
 
-        return view('user.show',['user'=> $account]);
+        return  redirect(route('user.show'));
 
 
 
