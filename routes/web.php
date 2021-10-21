@@ -66,6 +66,7 @@ Route::put('/tasks_put{task}',[TaskController::class,'restore'])->name('restore'
 Route::middleware('auth')->group(function () {
     Route::get('/logout',[UserController::class,'logout'])->name('exit');
     Route::get('/user',[UserController::class,'show'])->name('user.show');
+    Route::post('/user',[UserController::class,'update'])->name('user.update');
 
 
     Route::get('/tasks_trashed',[TaskController::class,'show_trash'])->name('show_trash');

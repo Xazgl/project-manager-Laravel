@@ -92,17 +92,38 @@ class UserController extends Controller
 
     public function avatar ($id,$user_id) // для отображения аватар путь в вьшку из базы
     {
-        $avatar= Avatar::select ()->find($user_id);
-        $user=User::select()->find($id);
-        if ($user_id===$id) {
-            $avatar_img=$avatar->path();
+        $avatar = Avatar::select()->find($user_id);
+        $user = User::select()->find($id);
+        if ($user_id === $id) {
+            $avatar_img = $avatar->path();
             echo $avatar_img;
-        }else {
-            $avatar_img=null;
-            echo  "";
+        } else {
+            $avatar_img = null;
+            echo "";
         }
+    }
+
+    public function update( $id,UserRegister $request)
+    {
+        //СОбрали все данные с формы
+        $data = $request->validated();
+
+        //Получили необходимую задачу из базы,которую будем редактировать
+        $account= User::find($id);
+
+        //Перезаписываем данные
+        $account->email = $data['email'];
+        $account->name = $data['name'];
+        $account->surname = $data['surname'];
+        //сохраняем в базе
+        $account->save();
+
+
+
+
 
     }
+
 /* public function avatar_update ($id,$user_id, $request) {
 
         $data = $request->all();// собираем данные с формы
